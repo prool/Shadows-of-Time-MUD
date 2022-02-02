@@ -98,6 +98,8 @@ void update_room(char *name, int count)
   MYSQL_ROW row;
   char query_string[MSL];
 
+	return; // prool
+
   sprintf(query_string, "SELECT id from top_explored where (name = '%s')", name);
   mysql_query(mysql, query_string);
   if (!(res = mysql_store_result(mysql)) || !mysql_num_rows(res))

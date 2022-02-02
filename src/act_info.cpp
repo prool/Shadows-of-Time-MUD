@@ -104,6 +104,9 @@ void do_top_ten(CHAR_DATA *ch, char *argument)
   MYSQL_ROW row;
   char buf[MSL];
 
+	send_to_char("no top ten!\r\n", ch); // prool
+	return;
+
   mysql_query(mysql, "SELECT name, explored FROM top_explored ORDER BY explored DESC");
   res = mysql_store_result(mysql);
   send_to_char("Top 10 explorers:\n\r", ch);

@@ -1,5 +1,4 @@
 # Ignore sensitive files.
-player/*
 player.backup
 gods/*
 data/roster/*

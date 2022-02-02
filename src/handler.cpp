@@ -2052,7 +2052,7 @@ void char_to_room (CHAR_DATA * ch, ROOM_INDEX_DATA * pRoomIndex)
           int count = roomcount(ch);
           if (count > low_roomed)
           {
-            update_room(ch->name, count);
+            update_room(ch->name, count); // prool: crash here
             init_top_ten();
           }
 

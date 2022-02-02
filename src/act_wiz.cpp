@@ -7086,7 +7086,7 @@ void copyover (CHAR_DATA * ch)
     save_equipid();
 //    save_stores();
     save_groups();	
-    mysql_close(mysql);
+//    mysql_close(mysql); // prool
     ispell_done();
     abandon_tournament();
 

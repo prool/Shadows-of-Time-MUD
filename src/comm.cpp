@@ -211,7 +211,7 @@ int    listen        args( ( int s, int backlog ) );
 */
 
 int close args ((int fd));
-int gettimeofday args ((struct timeval * tp, struct timezone * tzp));
+//int gettimeofday args ((struct timeval * tp, struct timezone * tzp)); // prool
 /* int    read        args( ( int fd, char *buf, int nbyte ) ); */
 int select args ((int width, fd_set * readfds, fd_set * writefds,
                   fd_set * exceptfds, struct timeval * timeout));

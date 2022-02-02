@@ -655,15 +655,24 @@ void boot_db ()
         load_equipid();
         logf("Stores", 0);
 	load_stores();
+	printf("prool debug label 00\n"); // prool
         // logf("Blah", 0);
         init_tournament();
+	printf("prool debug label 01\n"); // prool
         init_logs();
-        init_mysql();
+	printf("prool debug label 02\n"); // prool
+        //init_mysql(); // prool
+	printf("prool debug label 03\n"); // prool
         init_helps();
+	printf("prool debug label 04\n"); // prool
         load_fortune();
+	printf("prool debug label 05\n"); // prool
         load_quotester();
-        init_top_ten();
+	printf("prool debug label 06\n"); // prool
+        //init_top_ten(); // prool
+	printf("prool debug label 07\n"); // prool
         load_quest_info();    
+	printf("prool debug label 08\n"); // prool
  }
 
     return;
@@ -671,6 +680,7 @@ void boot_db ()
 
 void init_top_ten(void)
 {
+return; // prool
   MYSQL_RES *res;
   MYSQL_ROW row;
   mysql_query(mysql, "SELECT MIN(explored) from top_explored");
@@ -687,9 +697,14 @@ void init_top_ten(void)
 
 void init_mysql(void)
 {
+return; // prool
   mysql = mysql_init(NULL);
-  if (!mysql_real_connect(mysql, "localhost", "aod_fotn", "uqxtwege", "aod_fotn", 0, NULL, 0))
+printf("prool debug init_mysql 0\n"); // prool
+  if (!mysql_real_connect(mysql, "localhost", "newmudu", "QTStBHSZhzyk93H5", "newmud", 0, NULL, 0)) {
     logf("Coulnd't connect to DB", 0);
+	exit(1); // prool
+	}
+printf("prool debug init_mysql 1\n"); // prool
 }
 
 void load_quotester (void)
@@ -745,6 +760,7 @@ void init_logs()
   sprintf(buf, "%s%ld.html", LOG_RP_DIR, boot_time);
   if ((fp = fopen(buf, "w")) == NULL)
   {
+	printf("prool debug. filename='%s'\r\n", buf); // prool
     bug("Init Logs: fopen", 0);
     return;
   }
@@ -755,6 +771,7 @@ void init_logs()
   sprintf(buf, "%s%ld.html", LOG_PK_DIR, boot_time);
   if ((fp = fopen(buf, "w")) == NULL)
   {
+	printf("prool debug. filename='%s'\r\n", buf); // prool
     bug("Init Logs: fopen pk", 0);
     return;
   }
@@ -767,6 +784,7 @@ void init_logs()
   sprintf(buf, "%s%ld.html", LOG_IMM_DIR, boot_time);
   if ((fp = fopen(buf, "w")) == NULL)
   {
+	printf("prool debug. filename='%s'\r\n", buf); // prool
     bug("Init Logs: fopen imm", 0);
     return;
   }
@@ -1389,6 +1407,7 @@ void init_helps()
         MYSQL_RES *res;
         MYSQL_ROW row;
 
+#if 0 // prool
         mysql_query(mysql, "SELECT body FROM helps WHERE keyword = 'greeting'");
         if (!(res = mysql_store_result(mysql)) || !mysql_num_rows(res))
         {
@@ -1412,6 +1431,10 @@ void init_helps()
           help_name = str_dup(row[0]);
           mysql_free_result(res);
         }
+#else
+help_greeting = str_dup ("GREETINGS!\r\n");
+help_name = str_dup ("Enter name of new player: \r\n");
+#endif
 }
 
 /*
