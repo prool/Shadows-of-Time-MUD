@@ -30,6 +30,8 @@ void mysql_insert(MYSQL *mysql, char *table, char *fmt, ...)
    char buf[8092];
    char query_string[8092];
 
+return; // prool
+
    sprintf(query_string, "INSERT INTO %s VALUES(", table);
    va_start(ap, fmt);
 
@@ -127,6 +129,8 @@ void update_mobbed(char *name, int count)
   MYSQL_RES *res;
   MYSQL_ROW row;
   char query_string[MSL];
+
+	return; // prool
 
   sprintf(query_string, "SELECT id from top_mobbed where (name = '%s')", name);
   mysql_query(mysql, query_string);
