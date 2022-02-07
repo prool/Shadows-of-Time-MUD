@@ -3589,9 +3589,9 @@ extern "C" {char *  crypt           args( ( const char *key, const char *salt ) 
 #define PLAYER_DIR      "../player/"            /* Player files */
 #define ACCOUNT_DIR     "../player/accounts/"       /* Account Files */
 #define GOD_DIR         "../gods/"          /* list of gods */
-#define LOG_RP_DIR      "../../public_html/rp_logs/"
-#define LOG_PK_DIR      "../../public_html/pk_logs/"
-#define LOG_IMM_DIR     "../../public_html/imm_logs/"
+#define LOG_RP_DIR      "../public_html/rp_logs/"
+#define LOG_PK_DIR      "../public_html/pk_logs/"
+#define LOG_IMM_DIR     "../public_html/imm_logs/"
 #define DATA_DIR        "../data/"
 #define ROSTER_DIR      "../data/roster/"
 #define TEMP_FILE       "../player/romtmp"
@@ -3606,8 +3606,8 @@ extern "C" {char *  crypt           args( ( const char *key, const char *salt ) 
 #define BUG_FILE        "bugs.txt" /* For 'bug' and bug()*/
 #define TYPO_FILE       "typos.txt" /* For 'typo'*/
 #define NOTE_FILE       "notes.not"/* For 'notes'*/
-#define MPROG_FILE "/home/aod/SoT/public_html/data/mprog.html"
-#define HELP_FILE  "/home/aod/SoT/public_html/data/help.txt"
+#define MPROG_FILE "../public_html/data/mprog.html"
+#define HELP_FILE  "../public_html/data/help.txt"
 
 /* For undefined helps */
 #define IDEA_FILE       "ideas.not"

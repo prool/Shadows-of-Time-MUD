@@ -1,8 +1,8 @@
 /* Header for Web.c */
 
-#define MUDSTAT_FILE "/home/aod/FoTN/public_html/data/mudstat.html"
-#define PMOB_FILE "/home/aod/FoTN/public_html/data/mobs.html"
-#define POBJ_FILE "/home/aod/FoTN/public_html/data/objs.html"
+#define MUDSTAT_FILE "../public_html/data/mudstat.html"
+#define PMOB_FILE "../public_html/data/mobs.html"
+#define POBJ_FILE "../public_html/data/objs.html"
 void help_letter      args (( char letter, FILE *fp ));
 void print_one_help   args (( HELP_DATA *help, char *name));
 void helps_to_html    args (( void ));
@@ -36,7 +36,7 @@ void export_note  args ((NOTE_DATA *note, FILE *fp));
 #define SHASTE   12
 #define SSTONE   13
 
-#define EXPORT_NOTE_FOLDER "/home/mud/dsmud/public_html/data/notes/"
+#define EXPORT_NOTE_FOLDER "../public_html/data/notes/"
 
 extern const struct point_type point_table[];
 

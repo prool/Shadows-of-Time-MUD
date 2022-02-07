@@ -3774,7 +3774,7 @@ sprintf (buf,
 
 if (ch->clan != 0)
 {
-sprintf (buf,
+sprintf (buf, // prool: crash was here
 "`$Clan       `4: `*%s`*- %s`* ",
              clan_table[ch->clan].who_name,
              clan_table[ch->clan].rank[ch->rank]);
