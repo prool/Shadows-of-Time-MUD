@@ -15,7 +15,7 @@ void do_ohelp(CHAR_DATA *ch, char *argument)
   BUFFER *buffer;  
   bool gameHelp = FALSE;
 
-	send_to_char("no help!\r\n", ch); // prool
+	send_to_char("Help not found\r\n", ch); // prool
 	return;
 
   argument = one_argument(argument, arg1);
@@ -142,7 +142,7 @@ void do_mhelp(CHAR_DATA *ch, char *argument)
   BUFFER *buffer;  
   bool gameHelp = FALSE;
 
-	send_to_char("no mhelp. press enter\r\n", ch); // prool
+	send_to_char("Press Enter\r\n", ch); // prool
 	return;
 
   argument = one_argument(argument, arg1);
