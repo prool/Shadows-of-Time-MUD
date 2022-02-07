@@ -575,7 +575,7 @@ void web_mudstats()
   fprintf(fp, "<TH><FONT COLOR=#0000FF>%25s</TH>"
               "<TH><FONT COLOR=#06F918>%8s</TH>"
               "<TH><FONT COLOR=#FF0000>%5s</TH>\n", 
-		"Stats since 06/07", "Total", "Today");
+		"Stats", "Total", "Today");
   fprintf(fp, "<TR><TD ALIGN=LEFT><FONT COLOR=#02687D>%s</TD>"
               "<TD ALIGN=RIGHT><FONT COLOR=#4ABB44>%d</TD>"
               "<TD ALIGN=RIGHT><FONT COLOR=#BF4640>%d</TD></TR>\n", 
