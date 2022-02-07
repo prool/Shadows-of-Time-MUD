@@ -641,6 +641,7 @@ void save_one_roster(int clan)
   sprintf(filename, "%s%s.txt", ROSTER_DIR, clan_table[clan].name);
   if ((fp = fopen(filename, "w")) == NULL)
   {
+    printf("prool debug. filename='%s'\n", filename); // prool
     bug("Save_roster: fopen", 0);
     return;
   }  
