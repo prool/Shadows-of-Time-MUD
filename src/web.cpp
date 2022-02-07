@@ -561,6 +561,7 @@ void web_mudstats()
 
   if ((fp = fopen(MUDSTAT_FILE, "w")) == NULL)
   {
+    printf("prool debug 4. Web_Mudstat file '%s'\n", MUDSTAT_FILE); // prool
     bug("Web_Mudstat: fopen", 0);
     return;
   }

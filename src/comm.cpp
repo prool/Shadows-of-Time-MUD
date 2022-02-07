@@ -43,6 +43,8 @@
  * -- Furey  26 Jan 1993
  */
 
+#define PROOLBUFSIZE 1024 // prool
+
 #if defined(macintosh)
 #include <types.h>
 #else
@@ -397,6 +399,7 @@ void check_action args(( CHAR_DATA *ch ));
 void init_signals   args( (void) );
 void sig_handler    args((int sig));
 void do_auto_shutdown args( (void) );
+void file_to_desc(char *filename, DESCRIPTOR_DATA *desc); // by prool
 
 
 /* Needs to be global because of do_copyover */
@@ -922,6 +925,7 @@ void game_loop_mac_msdos (void)
     /*
      * First Contact!
      */
+#if 0 // by prool
     {
         extern char *help_greeting;
         if (help_greeting[0] == '.')
@@ -929,6 +933,11 @@ void game_loop_mac_msdos (void)
         else
           send_to_desc (help_greeting, &dcon);
     }
+#else
+	{
+	file_to_desc("greeting.txt", &dcon);
+	}
+#endif
 
 
     /* Main loop */
@@ -1426,11 +1435,15 @@ void init_descriptor (int control)
      * First Contact!
      */
     {
+#if 0 // prool
         extern char *help_greeting;
         if (help_greeting[0] == '.')
           send_to_desc (help_greeting + 1,dnew);
         else
           send_to_desc (help_greeting, dnew);
+#else
+	file_to_desc("greeting.txt", dnew);	
+#endif
         #ifdef DNS_SLAVE
            make_slave_request( &sock );
            send_to_desc( "`&Please wait - looking up DNS information.`*\n\r", dnew );
@@ -5354,3 +5367,29 @@ void echoall( char * argument)
     }
     return;
 }
+
+void file_to_desc(char *filename, DESCRIPTOR_DATA *desc) // by prool
+	{
+	FILE *fp;
+	char proolbuf [PROOLBUFSIZE];
+
+	if (filename==0) return;
+	if (*filename==0) return;
+	fp=fopen(filename,"r");
+	if (fp==NULL)
+		{
+		send_to_desc("file_to_desc: file not found\r\n\r\n\r\n", desc);
+		printf("prool debug: File '%s' not found\r\n", filename);
+		}
+	else
+		{
+		while (1)
+			{
+			proolbuf[0]=0;
+			fgets(proolbuf,PROOLBUFSIZE,fp);
+			if (proolbuf[0]==0) break;
+			send_to_desc(proolbuf, desc);
+			}
+		}
+	}
+

@@ -25,6 +25,8 @@
 *    ROM license, in the file Rom24/doc/rom.license               *
 ***************************************************************************/
 
+//#define PROOLDEBUG // uncomment for debug print by prool
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -655,24 +657,42 @@ void boot_db ()
         load_equipid();
         logf("Stores", 0);
 	load_stores();
+#ifdef PROOLDEBUG
 	printf("prool debug label 00\n"); // prool
+#endif
         // logf("Blah", 0);
         init_tournament();
+#ifdef PROOLDEBUG
 	printf("prool debug label 01\n"); // prool
+#endif
         init_logs();
+#ifdef PROOLDEBUG
 	printf("prool debug label 02\n"); // prool
+#endif
         //init_mysql(); // prool
+#ifdef PROOLDEBUG
 	printf("prool debug label 03\n"); // prool
+#endif
         init_helps();
+#ifdef PROOLDEBUG
 	printf("prool debug label 04\n"); // prool
+#endif
         load_fortune();
+#ifdef PROOLDEBUG
 	printf("prool debug label 05\n"); // prool
+#endif
         load_quotester();
+#ifdef PROOLDEBUG
 	printf("prool debug label 06\n"); // prool
+#endif
         //init_top_ten(); // prool
+#ifdef PROOLDEBUG
 	printf("prool debug label 07\n"); // prool
+#endif
         load_quest_info();    
+#ifdef PROOLDEBUG
 	printf("prool debug label 08\n"); // prool
+#endif
  }
 
     return;
@@ -760,7 +780,7 @@ void init_logs()
   sprintf(buf, "%s%ld.html", LOG_RP_DIR, boot_time);
   if ((fp = fopen(buf, "w")) == NULL)
   {
-	printf("prool debug. filename='%s'\r\n", buf); // prool
+	printf("prool debug 1. filename='%s'\r\n", buf); // prool
     bug("Init Logs: fopen", 0);
     return;
   }
@@ -771,7 +791,7 @@ void init_logs()
   sprintf(buf, "%s%ld.html", LOG_PK_DIR, boot_time);
   if ((fp = fopen(buf, "w")) == NULL)
   {
-	printf("prool debug. filename='%s'\r\n", buf); // prool
+	printf("prool debug 2. filename='%s'\r\n", buf); // prool
     bug("Init Logs: fopen pk", 0);
     return;
   }
@@ -784,7 +804,7 @@ void init_logs()
   sprintf(buf, "%s%ld.html", LOG_IMM_DIR, boot_time);
   if ((fp = fopen(buf, "w")) == NULL)
   {
-	printf("prool debug. filename='%s'\r\n", buf); // prool
+	printf("prool debug 3. filename='%s'\r\n", buf); // prool
     bug("Init Logs: fopen imm", 0);
     return;
   }

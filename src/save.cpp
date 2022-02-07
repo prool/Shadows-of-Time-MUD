@@ -137,7 +137,7 @@ void save_char_obj (CHAR_DATA * ch)
 
     fclose (fpReserve);
     sprintf (strsave, "%s%s", PLAYER_DIR, capitalize (IS_DISGUISED(ch)?ch->pcdata->disguise.orig_name:ch->name));
-	printf("prool debug TEMP_FILE = '%s'\n", TEMP_FILE); // prool
+    //	printf("prool debug TEMP_FILE = '%s'\n", TEMP_FILE); // prool
     if ((fp = fopen (TEMP_FILE, "w")) == NULL)
     {
         bug ("Save_char_obj: fopen", 0);
