@@ -1422,10 +1422,103 @@ void assign_area_vnum (long vnum)
     return;
 }
 
-void init_helps()
+void rom_load_helps (FILE * fp, char *fname) // by prool: module from ROM code
 {
+    HELP_DATA *pHelp;
+    int level;
+    char *keyword;
+
+//printf("prool debug load_helps() fname='%s'\n", fname); // prool
+
+    for (;;)
+    {
+        HELP_AREA *had;
+
+        level = fread_number (fp);
+        keyword = fread_string (fp);
+
+        if (keyword[0] == '$')
+            break;
+
+        if (!had_list)
+        {
+            had = new_had ();
+            had->filename = str_dup (fname);
+            had->area = current_area;
+            if (current_area)
+                current_area->helps = had;
+            had_list = had;
+        }
+        else if (str_cmp (fname, had_list->filename))
+        {
+            had = new_had ();
+            had->filename = str_dup (fname);
+            had->area = current_area;
+            if (current_area)
+                current_area->helps = had;
+            had->next = had_list;
+            had_list = had;
+        }
+        else
+            had = had_list;
+
+        pHelp = new_help ();
+        pHelp->level = level;
+        pHelp->keyword = keyword;
+        pHelp->text = fread_string (fp);
+
+        if (!str_cmp (pHelp->keyword, "greeting"))
+            help_greeting = pHelp->text;
+
+        if (help_first == NULL)
+            help_first = pHelp;
+        if (help_last != NULL)
+            help_last->next = pHelp;
+
+        help_last = pHelp;
+        pHelp->next = NULL;
+
+        if (!had->first)
+            had->first = pHelp;
+        if (!had->last)
+            had->last = pHelp;
+
+        had->last->next_area = pHelp;
+        had->last = pHelp;
+        pHelp->next_area = NULL;
+
+        top_help++;
+    }
+
+    return;
+}
+
+void init_helps() // modif by prool by code from ROM
+{
+#if 0 
         MYSQL_RES *res;
         MYSQL_ROW row;
+#endif
+
+FILE	*fp;
+char *word;
+
+help_greeting = str_dup ("GREETINGS!\r\n");
+help_name = str_dup ("Enter name of new player: \r\n");
+
+fp=fopen("help.hlp", "r");
+
+                if (fread_letter (fp) != '#')
+                {
+                    printf ("prool debug, help.hlp: # not found\n");
+                    exit (1);
+                }
+
+                word = fread_word (fp);
+
+if (fp==NULL) {printf("prool debug: file help.hlp not found\n"); return;}
+rom_load_helps(fp, "help.hlp");
+fclose (fp);
 
 #if 0 // prool
         mysql_query(mysql, "SELECT body FROM helps WHERE keyword = 'greeting'");
@@ -1451,9 +1544,6 @@ void init_helps()
           help_name = str_dup(row[0]);
           mysql_free_result(res);
         }
-#else
-help_greeting = str_dup ("GREETINGS!\r\n");
-help_name = str_dup ("Enter name of new player: \r\n");
 #endif
 }
 
