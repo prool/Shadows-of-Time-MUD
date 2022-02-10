@@ -1493,6 +1493,27 @@ void rom_load_helps (FILE * fp, char *fname) // by prool: module from ROM code
     return;
 }
 
+void process_hlp_file(char *filename) // by prool
+{
+FILE *fp;
+
+fp=fopen(filename, "r");
+
+if (fp==NULL) {printf("prool debug: file '%s' not found\n", filename); return;}
+
+if (fread_letter (fp) != '#')
+                {
+                    printf ("prool debug: in file '%s' '#' not found\n", filename);
+		    fclose (fp);
+		    return;
+                }
+
+fread_word (fp); // skip first keyword in hlp file - 'HELPS' word
+
+rom_load_helps(fp, filename);
+fclose (fp);
+}
+
 void init_helps() // modif by prool by code from ROM
 {
 #if 0 
@@ -1500,25 +1521,17 @@ void init_helps() // modif by prool by code from ROM
         MYSQL_ROW row;
 #endif
 
-FILE	*fp;
-char *word;
-
 help_greeting = str_dup ("GREETINGS!\r\n");
 help_name = str_dup ("Enter name of new player: \r\n");
 
-fp=fopen("help.hlp", "r");
+process_hlp_file ("help.hlp");
+process_hlp_file ("guild.hlp");
+process_hlp_file ("immortal.hlp");
+process_hlp_file ("legend.hlp");
+process_hlp_file ("newbie.hlp");
+process_hlp_file ("skills.hlp");
+process_hlp_file ("spells.hlp");
 
-                if (fread_letter (fp) != '#')
-                {
-                    printf ("prool debug, help.hlp: # not found\n");
-                    exit (1);
-                }
-
-                word = fread_word (fp);
-
-if (fp==NULL) {printf("prool debug: file help.hlp not found\n"); return;}
-rom_load_helps(fp, "help.hlp");
-fclose (fp);
 
 #if 0 // prool
         mysql_query(mysql, "SELECT body FROM helps WHERE keyword = 'greeting'");
